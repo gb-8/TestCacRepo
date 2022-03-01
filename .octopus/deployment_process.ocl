@@ -1,0 +1,23 @@
+step "Destroy Terraform resources" {
+
+    action {
+        action_type = "Octopus.TerraformDestroy"
+        properties = {
+            Octopus.Action.GoogleCloud.ImpersonateServiceAccount = "False"
+            Octopus.Action.GoogleCloud.UseVMServiceAccount = "True"
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Terraform.AllowPluginDownloads = "True"
+            Octopus.Action.Terraform.AzureAccount = "False"
+            Octopus.Action.Terraform.GoogleCloudAccount = "False"
+            Octopus.Action.Terraform.ManagedAccount = "None"
+            Octopus.Action.Terraform.PlanJsonOutput = "False"
+            Octopus.Action.Terraform.RunAutomaticFileSubstitution = "True"
+            Octopus.Action.Terraform.Template = <<-EOT
+                terraform {
+                }
+            EOT
+            Octopus.Action.Terraform.TemplateParameters = "{}"
+            Octopus.Action.Terraform.Workspace = "#{Octopus.Account.Name}"
+        }
+    }
+}
